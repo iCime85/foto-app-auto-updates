@@ -1,6 +1,6 @@
 {
 	"name": "fotoapp",
-	"version": "1.0.0",
+	"version": "1.1.0",
 	"description": "Foto App",
 	"author": "MEDIACARD3",
 	"license": "ISC",
@@ -13,6 +13,18 @@
 		"start": "nodemon app",
 		"dist": "build",
 		"ship": "build -p always"
+	},
+	"build": {
+		"appId": "com.fotoapp.mediacard3",
+		"copyright": "Copyright © 2018 MEDIACARD3",
+		"mac": {
+			"category": "public.app-category.photography"
+		},
+		"win": {
+			"target": [
+				"nsis"
+			]
+		}
 	},
 	"dependencies": {
 		"body-parser": "^1.18.3",
