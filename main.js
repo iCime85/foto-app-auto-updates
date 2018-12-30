@@ -23,12 +23,29 @@ if (process.platform === 'darwin') {
         label: 'About ' + name,
         role: 'about'
       },
+      { type: 'separator' },
       {
         label: 'Quit',
         accelerator: 'Command+Q',
         click() { app.quit(); }
       },
     ]
+  }, {
+    label: 'View',
+      submenu: [{
+        label: 'Toggle Developer Tools',
+        accelerator: (function () {
+          if (process.platform === 'darwin') {
+            return 'Alt+Command+I'
+          } else {
+            return 'Ctrl+Shift+I'
+    } })(),
+        click: function (item, focusedWindow) {
+          if (focusedWindow) {
+            focusedWindow.toggleDevTools()
+          }
+    }
+  }]
   })
 }
 
@@ -45,7 +62,7 @@ function createDefaultWindow() {
     height: 800
   });
 
-  //win.webContents.openDevTools();
+  // win.webContents.openDevTools();
 
   win.on('closed', () => {
     win = null;
