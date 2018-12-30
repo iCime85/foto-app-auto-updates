@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+	<% include ../templates/head %>
+
+	<body>
+		<!-- Navigation -->
+		<nav class="navbar navbar-default" role="navigation">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+				</button>
+			<a class="navbar-brand" href="#"><img src="" alt=""/></a>
+			</div>
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li><a href="/">DOMOV</a></li>
+					<li><a href="/uploadImage">NALOŽI SLIKO</a></li>
+					<li><a href="/gallery">GALERIJA SLIK</a></li>
+				</ul>
+			</div>
+		</nav> 
+	 
+	<div class="container-fluid">
+		<h2 class="text-center">Galerija slik</h2>
+
+		<div id="filters">
+			<a href="#" id="newer" class="selected">Newer</a>
+			<a href="#" id="older">Older</a>
+		</div>
+
+		<div class="row">
+			<div id="posts">
+				<% for(let image of images) {%>
+					<article class="post">
+						<div class="col-sm-6 col-md-3 item">
+							<figure>
+								<a href="<%= image.path %>" data-fancybox="1" data-caption=" <%= image.lastModifiedDate %> ">
+								<img src="<%= image.path %>" class="img-responsive"/></a>
+							</figure>
+							<time><%= image.lastModifiedDate %></time>
+						</div>
+					</article>
+				  <% } %>
+			</div>
+		</div>
+
+	</div>	
+	
+
+</body>
+</html>
+

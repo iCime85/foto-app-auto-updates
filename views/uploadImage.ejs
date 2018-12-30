@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+		<% include ../templates/head %>
+
+<body>
+	<!-- Napiše ime datoteke katero izberes -->
+	<script>
+			jQuery(function($) {
+				$('input[type="file"]').change(function() {
+				if ($(this).val()) {
+						var filename = $(this).val();
+						$(this).closest('.image-upload').find('.file-name').html(filename);
+				}
+				});
+			});		
+		</script>
+		
+		<!-- Navigation -->
+		<nav class="navbar navbar-default" role="navigation">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#"><img src="" alt=""/></a>
+			</div>
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+						<li><a href="/">DOMOV</a></li>
+						<li><a href="/uploadImage">NALOŽI SLIKO</a></li>
+						<li><a href="/gallery">GALERIJA SLIK</a></li>
+				</ul>
+			</div>
+		</nav> 
+ 
+	<div class="container center">
+		<div class="upload text-center">
+		<h1>Naloži sliko</h1>
+	
+			<form action="uploadImage/upload" method="POST" enctype="multipart/form-data">
+			
+			<p>Click the upload icon below to upload a file.</p>
+			
+			<%= typeof msg != 'undefined' ? msg : '' %>
+			
+				<div class="image-upload">
+					<label for="file-input">
+						<img src="/img/upload.png">
+					</label>
+					<input id="file-input" name="myImage" type="file" multiple>
+					<p class="file-name">
+						Please select a file.
+					</p>
+				</div>	
+					
+				<button type="submit" class="btn btn-default">Submit</button>
+	
+			</form>
+			<br>
+			<img src="<%= typeof img != 'undefined' ? img : '' %>" class="img-responsive" alt="">
+
+		</div><!-- end upload -->
+	</div>
+
+</body>
+</html>

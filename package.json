@@ -1,0 +1,30 @@
+{
+	"name": "fotoapp",
+	"version": "1.1.0",
+	"description": "Foto App",
+	"author": "MEDIACARD3",
+	"license": "ISC",
+	"main": "main.js",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/iCime85/photo-app-update-demo.git"
+	},
+	"scripts": {
+		"start": "nodemon app",
+		"dist": "build",
+		"ship": "build -p always"
+	},
+	"dependencies": {
+		"body-parser": "^1.18.3",
+		"ejs": "^2.5.7",
+		"electron-log": "^2.2.17",
+		"electron-updater": "^3.2.3",
+		"express": "^4.16.2",
+		"multer": "^1.3.0",
+		"path": "^0.12.7"
+	},
+	"devDependencies": {
+		"electron": "^2.0.16",
+		"electron-builder": "^20.34.0"
+	}
+}

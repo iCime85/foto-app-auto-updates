@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<% include ../templates/head %>
+
+<body class="bg">
+	<!-- Opens addUserWindow on click-->
+	<script>
+		function addUserWindow() {
+			var x = document.getElementById("addUserWindow");
+			if (x.style.display === "block") {
+				x.style.display = "none";
+			} else {
+				x.style.display = "block";
+			}
+		}
+	</script>
+
+		Current version: <span id="version">vX.Y.Z</span>
+		<div id="messages"></div>
+		<script>
+			// Display the current version
+			let version = window.location.hash.substring(1);
+			document.getElementById('version').innerText = version;
+			// Listen for messages
+			const {ipcRenderer} = require('electron');
+			ipcRenderer.on('message', function(event, text) {
+			var container = document.getElementById('messages');
+			var message = document.createElement('div');
+			message.innerHTML = text;
+			container.appendChild(message);
+			})
+		</script>
+
+	<div class="izbira center">
+		<div class="container item">
+			<div id="add-user" class="text-center">
+				<h2>Add New User</h2>
+				<i onClick="addUserWindow()" class="fas fa-user-plus fa-3x"></i>
+			</div>
+
+			<div class="messages">
+				<p><%= typeof msg != 'undefined' ? msg : '' %></p>
+			</div>
+
+			<div id="users">
+				<h2 class="text-center">Choose User</h2>
+				<% data.forEach(function(dat) { %>
+					<div class="baby item">
+						<a href="#"><img src="<%= dat.avatar %>" class="img-responsive">
+						<h4 class="name"> <%= dat.name %> <%= dat.lastname %></h4>
+						<p class="birthday"><%= dat.birthday %></p></a>
+					</div>
+				<% }); %>
+			</div>
+
+		</div>
+	</div>
+
+	<div id="addUserWindow" class="center">
+		<div class="row addUser">	 
+			<form data-toggle="validator" action="/send" method="POST"  role="form" >
+				<i onClick="addUserWindow()" class="far fa-window-close fa-2x"></i>
+			
+				<input class ="image" type='file' name="avatar" /> <br>
+	
+				<div class="form-group">
+					<label class="control-label" for="inputName">Name</label>
+					<input class="form-control" name="name" data-error="Please enter name field." placeholder="Name"  type="text" />
+					<div class="help-block with-errors"></div>
+				</div>
+	
+				<div class="form-group">
+				<label for="inputEmail" class="control-label">Priimek</label>
+				<input type="lastname" name="lastname" class="form-control" placeholder="Lastname">
+				<div class="help-block with-errors"></div>
+				</div>
+	
+				<div class="form-group">
+				<label for="inputEmail" class="control-label">Birthday</label>
+				<input type="birthday" name="birthday" class="form-control" placeholder="birthday">
+				<div class="help-block with-errors"></div>
+				</div>
+	
+				<div class="form-group">
+					<button class="btn btn-primary" type="submit">Submit</button>
+				</div>
+			</form>
+		</div>
+	</div><!-- end addUserWindow -->
+	
+</body>
+</html>
